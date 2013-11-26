@@ -76,12 +76,20 @@ public class LightNotifier extends Notifier {
 
     private static final String FORM_KEY_BRIDGE_IP = "bridgeIp";
     private static final String FORM_KEY_BRIDGE_USERNAME = "bridgeUsername";
+    private static final String FORM_KEY_BRIDGE_RUNNING_HUE = "bridgeRunningHue";
+    private static final String FORM_KEY_BRIDGE_SUCCESS_HUE = "bridgeSuccessHue";
+    private static final String FORM_KEY_BRIDGE_FAILED_HUE = "bridgeFailedHue";
+    private static final String FORM_KEY_BRIDGE_UNSTABLE_HUE = "bridgeUnstableHue";
 
     @Extension
     public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
         private String bridgeIp;
         private String bridgeUsername;
+        private String bridgeRunningHue;
+	private String bridgeSuccessHue;
+	private String bridgeFailedHue;
+	private String bridgeUnstableHue;
 
         public DescriptorImpl() {
             this.load();
@@ -143,6 +151,10 @@ public class LightNotifier extends Notifier {
 
             this.bridgeIp = formData.getString(FORM_KEY_BRIDGE_IP);
             this.bridgeUsername = formData.getString(FORM_KEY_BRIDGE_USERNAME);
+	    this.bridgeRunningHue = formData.getString(FORM_KEY_BRIDGE_RUNNING_HUE);
+	    this.bridgeSuccessHue = formData.getString(FORM_KEY_BRIDGE_SUCCESS_HUE);
+	    this.bridgeFailedHue = formData.getString(FORM_KEY_BRIDGE_FAILED_HUE);
+	    this.bridgeUnstableHue = formData.getString(FORM_KEY_BRIDGE_UNSTABLE_HUE);
             this.save();
             return super.configure(req, formData);
         }
@@ -153,6 +165,22 @@ public class LightNotifier extends Notifier {
 
         public String getBridgeUsername() {
             return this.bridgeUsername;
+        }
+
+        public String getBridgeRunningHue() {
+            return this.bridgeRunningHue;
+        }
+
+        public String getBridgeSuccessHue() {
+            return this.bridgeSuccessHue;
+        }
+
+        public String getBridgeFailedHue() {
+            return this.bridgeFailedHue;
+        }
+
+        public String getBridgeUnstableHue() {
+            return this.bridgeUnstableHue;
         }
     }
 }
